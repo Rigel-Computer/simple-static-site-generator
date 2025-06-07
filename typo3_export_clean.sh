@@ -1,9 +1,11 @@
+# 2025-06-07 21:27 MESZ – Kombiniertes Export- und Nachbearbeitungs-Skript für TYPO3-HTML-Export
+
 #!/bin/bash
-# 2025-06-07 17:46 MESZ – Kombiniertes Export- und Nachbearbeitungs-Skript für TYPO3-HTML-Export
 
 # Benutzerabfragen
 read -p "Gib die ID oder den Alias der Startseite ein: " ID
-read -p "Wie soll die erzeugte HTML-Datei heißen (z. B. startseite.html)? " HTMLNAME
+read -p "Wie soll die erzeugte HTML-Datei heißen (ohne .html, z. B. startseite)? " HTMLBASENAME
+HTMLNAME="${HTMLBASENAME%.html}.html"
 read -p "Gib den Namen des Ziel-Unterordners ein (z. B. meinprojekt): " ORDNERNAME
 
 # Zielverzeichnis setzen (immer unter static-copy)
@@ -32,16 +34,21 @@ wget \
 echo "Statische Kopie wurde in '$ZIELORDNER' gespeichert."
 
 # In das Zielverzeichnis wechseln
-cd "$ZIELORDNER" || { echo "Fehler: Verzeichnis $ZIELORDNER nicht gefunden."; exit 1; }
+cd "$ZIELORDNER"/* || { echo "Fehler: Ziel-Unterverzeichnis nicht gefunden."; exit 1; }
 
 # Block A – Dateien mit ? im Namen umbenennen
 echo "Block A – Dateien mit ? im Namen umbenennen..."
 
-# HTML: index.php?id=... → Benutzerdefinierter Name
+counter=0
 find . -type f -name 'index.php?id=*.html' | while read -r f; do
-  zielname=$(basename "$f" | sed 's|index\.php?id=.*|'"$HTMLNAME"'|')
+  if [ $counter -eq 0 ]; then
+    zielname="$HTMLNAME"
+  else
+    zielname=$(echo "$f" | sed 's|.*/index\.php?id=||')
+  fi
   echo "$f → $zielname"
   mv "$f" "$zielname"
+  counter=$((counter + 1))
 done
 
 # CSS: xyz.css?version.css → xyz.css
