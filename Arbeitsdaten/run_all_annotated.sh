@@ -1,3 +1,4 @@
+# 08.06.2025 21:28 – Exportiert eine TYPO3-Seite statisch via wget ohne Domain-Unterordnerstruktur.
 #!/bin/bash
 
 # Schleife zur Abfrage einer gültigen URL
@@ -69,3 +70,4 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Vorgang abgeschlossen. Statische Kopie liegt unter $ZIELORDNER vor."
+# 08.06.2025 21:28 – Exportiert eine TYPO3-Seite statisch via wget ohne Domain-Unterordnerstruktur.

@@ -1,7 +1,11 @@
+<!-- 08.06.2025 21:35 – Statische HTML-Erzeugung aus TYPO3 mit Bash-Skript, inkl. CMS-Einschränkungen und Anwendungshinweis -->
+
 # TYPO3 HTML-Export: Neue Anleitung mit `run_all.sh`
 
 ## Wichtig
 
+-  Dynamisch generierte Inhalte, die zur Laufzeit eines CMS wie TYPO3 erzeugt werden (z. B. Kontaktformulare per *powermail*, News-Plugins, Loginbereiche, Produktsysteme etc.), **werden im statischen Export nicht mehr funktionieren**. Das Ergebnis ist ein reines HTML-Abbild ohne serverseitige Funktionen.
+-  Das Skript wurde mit TYPO3 getestet, sollte aber prinzipiell auch mit anderen CMS-basierten Systemen oder rein statischen Websites funktionieren, sofern deren Seiten per `wget` vollständig abrufbar sind. Diese Fälle sind **nicht explizit getestet**.
 -  Dieses Skript kombiniert HTML-Export und Nachbearbeitung in einem Ablauf.
 -  Es ist für TYPO3-Websites gedacht und arbeitet mit zwei Hilfsskripten:
    -  `run_all.sh`: Hauptskript mit Benutzerführung
@@ -92,8 +96,6 @@ Falls der statische Export die Website ersetzen soll, können Sie:
 
 ---
 
----
-
 ## Sicherheitshinweis
 
 ### Die Nutzung des Skripts erfolgt auf eigenes Risiko.
@@ -104,4 +106,6 @@ Vor der Ausführung wird dringend empfohlen:
 -  Die Funktionsweise zu verstehen
 -  Tests in einer geeigneten Umgebung durchzuführen
 
-**Stand: 2025-06-08 – Version 2.0**
+**Stand: 2025-06-08 – Version 2.1**
+
+<!-- 08.06.2025 21:35 – Statische HTML-Erzeugung aus TYPO3 mit Bash-Skript, inkl. CMS-Einschränkungen und Anwendungshinweis -->
