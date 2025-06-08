@@ -21,6 +21,7 @@ USERAGENT="Mozilla/5.0"
 # Website herunterladen
 wget \
   --mirror \
+  --no-host-directories \
   --convert-links \
   --adjust-extension \
   --page-requisites \
