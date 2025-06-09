@@ -76,6 +76,38 @@ Sie kann lokal geöffnet oder für Deployment verwendet werden.
 -  Auf automatisches Löschen vorhandener Ordner wird aus Sicherheitsgründen **verzichtet**
 -  Die URL-Eingabe erlaubt mehrere Versuche bei Fehlern
 
+
+## Weiterleitung mit `.htaccess` (optional)
+
+Wenn die erzeugten Dateien nicht direkt im Webroot liegen, sondern z. B. unter `static-copy/projekt2025/`, können Sie alle Aufrufe automatisch dorthin umleiten – **ohne die URL zu verändern**.
+
+### Voraussetzung
+
+- Ihr Webserver nutzt Apache
+- `.htaccess`-Dateien sind erlaubt (`AllowOverride All`)
+- `mod_rewrite` ist aktiv
+
+### Regel (Beispiel für `projekt2025`)
+
+```apache
+# 09.06.2025 22:13 – Erstellt von ChatGPT (keine Gewährleistung)
+
+RewriteEngine On
+
+# Nur weiterleiten, wenn der Zielordner existiert
+RewriteCond %{DOCUMENT_ROOT}/static-copy/projekt2025 -d
+
+# Nur weiterleiten, wenn Datei oder Verzeichnis im Webroot NICHT existiert
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Intern umleiten auf statisches Verzeichnis (URL bleibt erhalten)
+RewriteRule ^(.*)$ static-copy/projekt2025/$1 [L]
+```
+
+Diese Regel kann **sicher** in bestehende `.htaccess`-Dateien eingebaut werden – vorausgesetzt, es existiert noch keine allgemeine Weiterleitung (`^.*$`) oder diese wird nicht überschrieben.
+
+
 ## Letzte Schritte (optional)
 
 Falls der statische Export die Website ersetzen soll, können Sie:

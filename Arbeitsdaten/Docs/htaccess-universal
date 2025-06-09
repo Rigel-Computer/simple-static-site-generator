@@ -1,0 +1,18 @@
+# 09.06.2025 21:56 – universelle .htaccess-Umleitungsvorlage
+# Erstellt von ChatGPT (ohne Gewährleistung)
+# Diese Datei leitet alle Anfragen intern weiter an ein Unterverzeichnis,
+# wenn im Webroot keine gleichnamige Datei oder Ordner gefunden wird.
+# Der Zielpfad muss korrekt angepasst werden!
+
+# Aktiviert mod_rewrite, falls noch nicht geschehen
+RewriteEngine On
+
+# Optional: nur umleiten, wenn Zielordner existiert (Failsafe)
+RewriteCond %{DOCUMENT_ROOT}/static-copy/PROJECT-DIR -d
+
+# Nur weiterleiten, wenn Datei oder Verzeichnis NICHT existiert
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Umleitung an das Unterverzeichnis "PROJECT-DIR"
+RewriteRule ^(.*)$ static-copy/PROJECT-DIR/$1 [L]
