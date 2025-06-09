@@ -1,8 +1,23 @@
+# 09.06.2025 14:09 – Fügt Benutzerhinweis für vollständige URLs hinzu (inkl. Protokoll/Subdomain) zur Vermeidung fehlerhafter Aufrufe
+
 #!/bin/bash
 
 # Schleife zur Abfrage einer gültigen URL
 while true; do
+  echo
+  echo "Hinweis:"
+  echo "Bitte gib die vollständige URL mit Protokoll und ggf. Subdomain an."
+  echo "Beispiel: https://www.example.com oder https://sub.example.com"
+  echo "Ohne Subdomain (z. B. nur example.com) funktioniert der Aufruf evtl. nicht!"
+  echo
+
   read -p "Gib die Start-URL der TYPO3-Seite ein: " STARTURL
+
+  # Sicherstellen, dass ein Protokoll vorhanden ist
+  if [[ ! "$STARTURL" =~ ^https?:// ]]; then
+    echo "Fehler: Bitte gib die vollständige URL inklusive http:// oder https:// an."
+    continue
+  fi
 
   if curl --head --silent --fail "$STARTURL" > /dev/null; then
     break
@@ -69,3 +84,5 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Vorgang abgeschlossen. Statische Kopie liegt unter $ZIELORDNER vor."
+
+# 09.06.2025 14:09 – Fügt Benutzerhinweis für vollständige URLs hinzu (inkl. Protokoll/Subdomain) zur Vermeidung fehlerhafter Aufrufe
