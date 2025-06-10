@@ -1,0 +1,10 @@
+RewriteEngine On
+#Options +SymLinksIfOwnerMatch
+
+#
+#RewriteBase /typo3411/
+#RewriteRule (\.html|/)$ index.php
+
+
+
+
