@@ -1,17 +1,23 @@
+# 11.06.2025 12:08 – Added by ChatGPT: internal redirect to static-copy/ZZZ
 
-# 09.06.2025 22:10 – Ergänzung um Rewrite auf static-copy/TestFinal (erstellt von ChatGPT, keine Gewähr)
+# Redirects all requests to the static directory if the requested file or folder does not exist.
 
-# Aktiviert mod_rewrite, falls noch nicht geschehen
+# URL remains unchanged. Adjust 'ZZZ' if needed.
+
 RewriteEngine On
 
-# Nur umleiten, wenn Zielordner existiert (Failsafe)
-RewriteCond %{DOCUMENT_ROOT}/static-copy/TestFinal -d
+# Redirect only if the target directory exists
 
-# Nur weiterleiten, wenn Datei oder Verzeichnis NICHT existiert
+RewriteCond %{DOCUMENT_ROOT}/static-copy/ZZZ -d
+
+# Proceed only if no matching file or directory is found in webroot
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# Umleitung an das Unterverzeichnis
-RewriteRule ^(.*)$ static-copy/TestFinal/$1 [L]
+# Internally rewrite to static-copy folder
 
-# 09.06.2025 22:10 – Ergänzung um Rewrite auf static-copy/TestFinal (erstellt von ChatGPT, keine Gewähr)
+RewriteRule ^(.*)$ static-copy/ZZZ/$1 [L]
+#RewriteRule ^(._)$ static-copy/TestFinal/$1 [L]
+
+# End of ChatGPT rewrite blocks

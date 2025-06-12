@@ -108,6 +108,29 @@ RewriteRule ^(.*)$ static-copy/projekt2025/$1 [L]
 Diese Regel kann **sicher** in bestehende `.htaccess`-Dateien eingebaut werden – vorausgesetzt, es existiert noch keine allgemeine Weiterleitung (`^.*$`) oder diese wird nicht überschrieben.
 
 
+
+## Integration der `.htaccess`-Regel (Sicherheitskopie empfohlen)
+
+Bevor Sie die Weiterleitungsregel in eine bestehende `.htaccess`-Datei einfügen, beachten Sie Folgendes:
+
+1. **Erstellen Sie eine Sicherheitskopie Ihrer aktuellen `.htaccess`**:
+   ```bash
+   cp .htaccess .htaccess-original
+   ```
+
+2. **Überprüfen Sie**, ob bereits folgende Einträge vorhanden sind:
+   - `RewriteEngine On` (darf nur einmal vorkommen)
+   - Eine allgemeine Regel wie `RewriteRule ^(.*)$ ... [L]`
+
+   Falls solche Regeln bereits vorhanden sind, dürfen sie **nicht doppelt eingefügt werden**.  
+   Der neue Block sollte **vor einer vorhandenen Catch-All-Regel eingefügt** oder mit ihr kombiniert werden.
+
+3. **Vermeiden Sie doppelte `[L]`-Regeln**, die denselben Ausdruck `^.*$` abdecken.
+
+4. Laden Sie die angepasste `.htaccess` vorsichtig hoch und testen Sie die Funktion z. B. mit einer bewusst aufgerufenen Datei, die nicht im Webroot liegt.
+
+
+
 ## Letzte Schritte (optional)
 
 Falls der statische Export die Website ersetzen soll, können Sie:

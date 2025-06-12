@@ -106,6 +106,29 @@ RewriteRule ^(.*)$ static-copy/projekt2025/$1 [L]
 
 This rule can be **safely** integrated into existing `.htaccess` files – provided there is no global rewrite (`^.*$`) or it is not overridden.
 
+
+## Integration of the `.htaccess` rule (backup recommended)
+
+Before inserting the redirect rule into an existing `.htaccess` file, please consider the following:
+
+1. **Make a backup of your current `.htaccess`**:
+   ```bash
+   cp .htaccess .htaccess-original
+   ```
+
+2. **Check** if any of the following entries already exist:
+   - `RewriteEngine On` (must appear only once)
+   - A generic rule like `RewriteRule ^(.*)$ ... [L]`
+
+   If such rules are present, do **not insert duplicates**.  
+   Instead, insert the new block **before an existing catch-all rule**, or adjust it accordingly.
+
+3. **Avoid duplicate `[L]` rules** matching the same pattern `^.*$`.
+
+4. Upload your modified `.htaccess` carefully and test it using a request to a file that is not in the root directory.
+
+
+
 ## Final Steps (optional)
 
 If the static export is intended to replace the live site, you can:
