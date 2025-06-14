@@ -2,9 +2,16 @@
 
 # TYPO3 HTML-Export: Neue Anleitung mit `run_all.sh`
 
+## Sprachversionen
+
+Für dieses Skript stehen zwei Varianten zur Verfügung:
+
+-  `run_all_DE.sh` mit deutscher Benutzerführung
+-  `run_all_EN.sh` mit englischer Benutzerführung
+
 ## Wichtig
 
--  Dynamisch generierte Inhalte, die zur Laufzeit eines CMS wie TYPO3 erzeugt werden (z. B. Kontaktformulare per *powermail*, News-Plugins, Loginbereiche, Produktsysteme etc.), **werden im statischen Export nicht mehr funktionieren**. Das Ergebnis ist ein reines HTML-Abbild ohne serverseitige Funktionen.
+-  Dynamisch generierte Inhalte, die zur Laufzeit eines CMS wie TYPO3 erzeugt werden (z. B. Kontaktformulare per _powermail_, News-Plugins, Loginbereiche, Produktsysteme etc.), **werden im statischen Export nicht mehr funktionieren**. Das Ergebnis ist ein reines HTML-Abbild ohne serverseitige Funktionen.
 -  Das Skript wurde mit TYPO3 getestet, sollte aber prinzipiell auch mit anderen CMS-basierten Systemen oder rein statischen Websites funktionieren, sofern deren Seiten per `wget` vollständig abrufbar sind. Diese Fälle sind **nicht explizit getestet**.
 -  Dieses Skript kombiniert HTML-Export und Nachbearbeitung in einem Ablauf.
 -  Es ist für TYPO3-Websites gedacht und arbeitet mit zwei Hilfsskripten:
@@ -76,16 +83,15 @@ Sie kann lokal geöffnet oder für Deployment verwendet werden.
 -  Auf automatisches Löschen vorhandener Ordner wird aus Sicherheitsgründen **verzichtet**
 -  Die URL-Eingabe erlaubt mehrere Versuche bei Fehlern
 
-
 ## Weiterleitung mit `.htaccess` (optional)
 
 Wenn die erzeugten Dateien nicht direkt im Webroot liegen, sondern z. B. unter `static-copy/projekt2025/`, können Sie alle Aufrufe automatisch dorthin umleiten – **ohne die URL zu verändern**.
 
 ### Voraussetzung
 
-- Ihr Webserver nutzt Apache
-- `.htaccess`-Dateien sind erlaubt (`AllowOverride All`)
-- `mod_rewrite` ist aktiv
+-  Ihr Webserver nutzt Apache
+-  `.htaccess`-Dateien sind erlaubt (`AllowOverride All`)
+-  `mod_rewrite` ist aktiv
 
 ### Regel (Beispiel für `projekt2025`)
 
@@ -107,20 +113,20 @@ RewriteRule ^(.*)$ static-copy/projekt2025/$1 [L]
 
 Diese Regel kann **sicher** in bestehende `.htaccess`-Dateien eingebaut werden – vorausgesetzt, es existiert noch keine allgemeine Weiterleitung (`^.*$`) oder diese wird nicht überschrieben.
 
-
-
 ## Integration der `.htaccess`-Regel (Sicherheitskopie empfohlen)
 
 Bevor Sie die Weiterleitungsregel in eine bestehende `.htaccess`-Datei einfügen, beachten Sie Folgendes:
 
 1. **Erstellen Sie eine Sicherheitskopie Ihrer aktuellen `.htaccess`**:
+
    ```bash
    cp .htaccess .htaccess-original
    ```
 
 2. **Überprüfen Sie**, ob bereits folgende Einträge vorhanden sind:
-   - `RewriteEngine On` (darf nur einmal vorkommen)
-   - Eine allgemeine Regel wie `RewriteRule ^(.*)$ ... [L]`
+
+   -  `RewriteEngine On` (darf nur einmal vorkommen)
+   -  Eine allgemeine Regel wie `RewriteRule ^(.*)$ ... [L]`
 
    Falls solche Regeln bereits vorhanden sind, dürfen sie **nicht doppelt eingefügt werden**.  
    Der neue Block sollte **vor einer vorhandenen Catch-All-Regel eingefügt** oder mit ihr kombiniert werden.
@@ -128,8 +134,6 @@ Bevor Sie die Weiterleitungsregel in eine bestehende `.htaccess`-Datei einfügen
 3. **Vermeiden Sie doppelte `[L]`-Regeln**, die denselben Ausdruck `^.*$` abdecken.
 
 4. Laden Sie die angepasste `.htaccess` vorsichtig hoch und testen Sie die Funktion z. B. mit einer bewusst aufgerufenen Datei, die nicht im Webroot liegt.
-
-
 
 ## Letzte Schritte (optional)
 
@@ -163,4 +167,4 @@ Vor der Ausführung wird dringend empfohlen:
 
 **Stand: 2025-06-08 – Version 2.1**
 
-<!-- 08.06.2025 21:35 – Statische HTML-Erzeugung aus TYPO3 mit Bash-Skript, inkl. CMS-Einschränkungen und Anwendungshinweis -->
+<!-- 14.06.2025 21:38 – Sprachhinweis ergänzt -->

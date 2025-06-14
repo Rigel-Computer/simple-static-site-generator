@@ -42,6 +42,10 @@ When hosting providers upgrade their default PHP version, compatibility issues w
 Upload both scripts to your TYPO3 webroot (`htdocs/`):
 
 -  `run_all.sh` - main interactive script
+   bash run_all.sh
+
+   (either \_DE for German or \_EN for English Version)
+
 -  `nachbearbeiten.sh` - post-processing script
 
 ## Usage
@@ -50,7 +54,7 @@ Upload both scripts to your TYPO3 webroot (`htdocs/`):
 2. Navigate to your TYPO3 webroot
 3. Run the script:
    ```
-   bash run_all.sh
+   bash run_all.sh (either DE for German or EN for English Version)
    ```
 4. Follow the interactive prompts:
    -  Enter the start URL (e.g., `https://example.org`)
@@ -93,7 +97,7 @@ For optimal functionality:
 
 The repository includes everything you need:
 
--  `run_all.sh`: main interactive script
+-  `run_all_DE.sh`/ run_all_EN.sh: main interactive script
 -  `nachbearbeiten.sh`: renames and cleans up HTML content
 -  HowTo guides and README for step-by-step help
 
